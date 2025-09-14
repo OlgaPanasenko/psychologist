@@ -798,10 +798,12 @@
                         <span class="text">Telegram</span>
                     </a>
 
-                    <a class="social-btn viber" href="viber://chat?number=380992106188" aria-label="Viber">
+                    <a class="social-btn viber" href="https://viber.me/380992106188"
+                        onclick="openViber(event, '+380992106188')" aria-label="Viber">
                         <i class="fab fa-viber"></i>
                         <span class="text">Viber</span>
                     </a>
+
 
                     <a class="social-btn tiktok" href="https://www.tiktok.com/@user80412529230944" target="_blank"
                         aria-label="TikTok">
@@ -890,6 +892,20 @@
         })();
     </script>
 
+    <script>
+        function openViber(e, number) {
+            e.preventDefault();
+            const ua = navigator.userAgent || '';
+            const isAndroid = /Android/i.test(ua);
+            const isIOS = /iPhone|iPad|iPod/i.test(ua);
+            const web = 'https://viber.me/' + number.replace(/^\+/, '');
+            const appChat = 'viber://chat?number=' + number;
+            if (isAndroid) window.location = 'intent://chat?number=' + number.replace(/^\+/, '') + '#Intent;scheme=viber;package=com.viber.voip;end';
+            else if (isIOS) window.location = appChat;
+            else window.location = appChat;
+            setTimeout(() => { window.location = web; }, 1000);
+        }
+    </script>
 
 
     <script>
