@@ -469,7 +469,7 @@ body.nav-open {
   min-height: 100vh;
 }
 
-header h2 {
+header h1 {
   font-size: 28px;
   color: var(--accent);
   font-weight: 700;
