@@ -2213,4 +2213,17 @@ section .text p span {
   #products .consult-wrapper {
     margin: 0;
   }
+  .reviews-grid .lead {
+    margin-bottom: 0;
+  }
+  .products-list {
+    display: flex;
+    margin: 20px auto 0;
+  }
+  .lead span {
+    display: block;
+  }
+  .reviews-grid > div {
+    width: 100%;
+  }
 }
