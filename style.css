@@ -1611,6 +1611,18 @@ section .text p span {
   max-width: 1320px;
   margin: auto;
 }
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 .modal {
   position: fixed;
   inset: 0;
@@ -1620,6 +1632,7 @@ section .text p span {
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.18s linear;
+  z-index: 1010;
 }
 .modal[aria-hidden='false'] {
   pointer-events: auto;
@@ -1694,11 +1707,16 @@ section .text p span {
   margin-top: 16px;
 }
 
+#game .services > .main-btn {
+  margin-top: -200px;
+}
+
 #game .services {
   max-width: 1400px;
 }
 
 #game .services-wrapper {
+  margin-top: 200px;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
@@ -2141,7 +2159,9 @@ section .text p span {
     line-height: 1;
   }
   .main-btn {
-    font-size: 12px;
+    font-size: 11px;
+    padding-left: 5px;
+    padding-right: 5px;
   }
   .cards .body {
     padding-left: 10px;
@@ -2164,8 +2184,14 @@ section .text p span {
   }
   #game .services img {
     margin-bottom: 50px;
-    max-width: 90vw;
     order: 2;
+    width: 90vw;
+  }
+  #game .services > .main-btn {
+    order: 4;
+    margin-top: -200px;
+    margin-bottom: 150px;
+    text-align: center;
   }
   #game .services {
     padding-bottom: 0;
@@ -2240,5 +2266,11 @@ section .text p span {
   }
   .products-list.bg .product-item.pb-0 {
     padding-bottom: 0;
+  }
+}
+@media (max-width: 640px) {
+  #game .services > .main-btn {
+    margin-top: -40vw;
+    margin-bottom: 20vw;
   }
 }
