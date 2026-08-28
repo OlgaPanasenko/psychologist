@@ -1464,12 +1464,18 @@
 
         <div class="game-text">
           <div class="head">
-            <h2>ПСИХОЛОГІЧНІ ІГРИ <span>«Мами» | "Психосоматика"</span></h2>
+            <h2>ПСИХОЛОГІЧНІ ІГРИ <span>авторська гра «Мами»</span></h2>
             <p class="lead">
-             Психологічні ігри - це ефективний інструмент психотерапії та самоаналізу.  <br />
+              В цю гру має зіграти кожна жінка! Гра дарує теплий контакт із
+              власною Внутрішньою Жінкою, відкриває її дійсні потреби, бажання
+              та сили. <br />
               <br />
-              Вони як психологічна консультація, тільки цікавіші.
-              Вони наче захоплюючі ігри з дитинства, проте мають потужний психологічний ефект!            </p>
+              В гру "Мами" грають із запитами: - вагітність, - материнство, -
+              нав'язливі думки, - негативні емоції (провина, невпевненість,
+              страхи, сумніви), -стосунки з чоловіком, батьками, дітьми,
+              -минуле, що болить, - складно проявлятися, заявляти про себе
+              світу.
+            </p>
           </div>
         </div>
       </div>
@@ -2132,30 +2138,87 @@
         }
         function openConsultTab(tabEl, push = true) {
           if (!tabEl) return;
-          allConsultTabs.forEach((t) => {
-            const h = t.querySelector(".consult-tab-head");
-            const b = t.querySelector(".consult-tab-body");
-            t.classList.remove("is-open");
-            if (h) h.setAttribute("aria-expanded", "false");
-            if (b) b.style.height = "0px";
-          });
-          tabEl.classList.add("is-open");
+
           const head = tabEl.querySelector(".consult-tab-head");
           const body = tabEl.querySelector(".consult-tab-body");
-          if (head) head.setAttribute("aria-expanded", "true");
-          if (body) {
-            body.style.height = "auto";
-            const h = body.scrollHeight + "px";
-            body.style.height = "0px";
-            requestAnimationFrame(() => (body.style.height = h));
-            body.addEventListener("transitionend", function onEnd(e) {
-              if (e.propertyName === "height") {
-                body.style.height = "auto";
-                body.removeEventListener("transitionend", onEnd);
-              }
-            });
+
+          // Запам'ятовуємо, де знаходиться заголовок нового таба
+          // відносно екрана ДО закриття попереднього
+          const beforeTop = tabEl.getBoundingClientRect().top;
+
+          // Закриваємо всі інші таби БЕЗ анімації висоти
+          allConsultTabs.forEach((t) => {
+            if (t === tabEl) return;
+
+            const h = t.querySelector(".consult-tab-head");
+            const b = t.querySelector(".consult-tab-body");
+
+            t.classList.remove("is-open");
+
+            if (h) {
+              h.setAttribute("aria-expanded", "false");
+            }
+
+            if (b) {
+              b.style.transition = "none";
+              b.style.height = "0px";
+              b.style.opacity = "0";
+
+              // повертаємо transition після перерахунку layout
+              requestAnimationFrame(() => {
+                b.style.transition = "";
+              });
+            }
+          });
+
+          // Після того як попередній великий таб схлопнувся,
+          // компенсуємо зміну висоти сторінки
+          const afterTop = tabEl.getBoundingClientRect().top;
+          const difference = afterTop - beforeTop;
+
+          window.scrollBy({
+            top: difference,
+            left: 0,
+            behavior: "auto",
+          });
+
+          // Відкриваємо вибраний таб
+          tabEl.classList.add("is-open");
+
+          if (head) {
+            head.setAttribute("aria-expanded", "true");
           }
-          if (push && tabEl.id) history.pushState(null, "", "#" + tabEl.id);
+
+          if (body) {
+            body.style.transition = "none";
+            body.style.height = "0px";
+            body.style.opacity = "0";
+
+            // force reflow
+            body.offsetHeight;
+
+            const targetHeight = body.scrollHeight;
+
+            body.style.transition = "";
+
+            requestAnimationFrame(() => {
+              body.style.height = targetHeight + "px";
+              body.style.opacity = "1";
+            });
+
+            const onEnd = (e) => {
+              if (e.propertyName !== "height") return;
+
+              body.style.height = "auto";
+              body.removeEventListener("transitionend", onEnd);
+            };
+
+            body.addEventListener("transitionend", onEnd);
+          }
+
+          if (push && tabEl.id) {
+            history.replaceState(null, "", "#" + tabEl.id);
+          }
         }
 
         allConsultTabs.forEach((tab) => {
