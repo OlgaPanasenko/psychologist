@@ -714,7 +714,6 @@ section h2 span {
   padding: 200px 50px 180px;
   min-height: 100vh;
   background-color: var(--back);
-  margin-top: -200px;
 }
 
 .about-container {
@@ -765,6 +764,12 @@ section .text p span {
   }
   .about-container {
     flex-direction: column;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin: 0 auto 60px;
+    position: static;
+    width: 100%;
+    padding-top: 50px;
   }
   .about-container img {
     max-width: 98vw;
@@ -777,7 +782,7 @@ section .text p span {
     font-size: 20px;
   }
   section .text {
-    padding: 15px;
+    padding: 0;
   }
   p {
     font-size: 18px;
@@ -794,14 +799,8 @@ section .text p span {
   margin: 40px auto 0;
   position: relative;
   z-index: 100;
-  background-image: linear-gradient(
-    to top,
-    #fff 0%,
-    rgba(255, 255, 255, 1) 25%,
-    rgba(255, 255, 255, 0) 85%
-  );
 
-  padding: 50px 30px 70px;
+  padding: 50px 0 70px;
 }
 
 .services-wrapper {
@@ -887,7 +886,7 @@ section .text p span {
 
 .consult {
   position: relative;
-  padding: 0 20px 80px;
+  padding: 80px 20px 80px;
   width: 100%;
   background-image:
     linear-gradient(
@@ -1361,7 +1360,10 @@ section .text p span {
 
 @media (max-width: 560px) {
   .certs {
-    padding: 60px 15px 15px;
+    padding: 0;
+    padding-top: 60px;
+    margin-bottom: 40px;
+    background-color: transparent;
   }
   .certs .head {
     padding-top: 0;
@@ -2154,6 +2156,7 @@ section .text p span {
   }
   #about {
     padding-bottom: 0;
+    padding-top: 0;
   }
   .certs-viewport {
     padding-bottom: 0;
@@ -3838,7 +3841,7 @@ section .text p span {
 
   gap: 65px;
 
-  margin-bottom: 100px;
+  margin-bottom: 0;
 }
 
 .consult-text--new {
@@ -4487,7 +4490,7 @@ body.modal-open {
   .consult-intro--new {
     grid-template-columns: 1fr;
 
-    gap: 30px;
+    gap: 20px;
   }
 
   .consult-text--new {
@@ -4516,7 +4519,7 @@ body.modal-open {
   }
 
   .consult-text--new {
-    padding: 0 0 15px;
+    padding: 0 0;
 
     align-items: center;
   }
@@ -4566,7 +4569,7 @@ body.modal-open {
   }
 
   .consult-modal__dialog {
-    width: 100%;
+    width: 95%;
 
     max-height: 92dvh;
 
