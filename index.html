@@ -110,7 +110,7 @@
                 </button>
                 <ul class="mdropdown">
                   <li>
-                    <a href="#for-women">Планую вагітність</a>
+                    <a href="#for-women1">Планую вагітність</a>
                   </li>
                   <li>
                     <a href="#for-women2">Я вагітна</a>
@@ -897,7 +897,7 @@
               <span class="consult-arrow" aria-hidden="true"></span>
             </button>
             <div class="consult-tab-body">
-              <div class="products-list" id="for-women">
+              <div class="products-list">
                 <div class="cards">
                   <article
                     class="card"
@@ -1144,7 +1144,7 @@
               <span class="consult-arrow" aria-hidden="true"></span>
             </button>
             <div class="consult-tab-body">
-              <div class="products-list bg" id="for-women2">
+              <div class="products-list bg">
                 <div class="cards">
                   <article
                     class="card"
@@ -1367,7 +1367,7 @@
             </div>
           </div>
 
-          <div class="consult-tab" data-tab-index="1" id="for-women3">
+          <div class="consult-tab" data-tab-index="2" id="for-women3">
             <button
               class="consult-tab-head"
               aria-expanded="false"
@@ -1409,7 +1409,7 @@
               <span class="consult-arrow" aria-hidden="true"></span>
             </button>
             <div class="consult-tab-body">
-              <div class="products-list bg" id="for-women3">
+              <div class="products-list bg">
                 <div class="product-item pb-0">
                   <div class="text">
                     <h3>
@@ -2399,7 +2399,15 @@
 
           if (consultById[id]) {
             e.preventDefault();
-            openConsultTab(consultById[id], true);
+
+            const tab = consultById[id];
+
+            openConsultTab(tab, true);
+
+            setTimeout(() => {
+              smoothScrollInto(tab);
+            }, 150);
+
             return;
           }
 
